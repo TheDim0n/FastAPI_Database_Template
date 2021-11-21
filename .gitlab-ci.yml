@@ -5,7 +5,7 @@ stages:
 
 test:
   stage: test
-  scripts:
+  script:
     - python -m venv venv
     - venv/bin/activate
     - python -m pip install -U pip
