@@ -1,6 +1,6 @@
 # TaskX-Backend
 
-![](https://gitlab.com/TheDim0n/taskx-backend/-/badges/main)
+![](https://gitlab.com/TheDim0n/taskx-backend/badges/main/pipeline.svg?key_text=tests)
 
 ### Python installation
 **1.** Create and activate virtual environment:
