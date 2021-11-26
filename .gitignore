@@ -136,3 +136,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# local migrations
+/app/database/migrations/versions/*.py
