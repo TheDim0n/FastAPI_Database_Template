@@ -3,13 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database.database import DataBase
-from app.dependencies import get_settings, get_db
+from app.dependencies import get_db
 from app.main import app
 
 
-SQLALCHEMY_DATABASE_URL = get_settings().database_url
+SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(SQLALCHEMY_DATABASE_URL,
+                       connect_args={"check_same_thread": False})
 TestingSessionLocal = sessionmaker(autocommit=False,
                                    autoflush=False, bind=engine)
 
