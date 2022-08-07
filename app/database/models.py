@@ -1,4 +1,7 @@
-from sqlalchemy import Column, Integer, String
+import uuid
+
+from sqlalchemy import Column, String
+from sqlalchemy.dialects.postgresql import UUID
 
 from .database import DataBase
 
@@ -6,5 +9,5 @@ from .database import DataBase
 class Message(DataBase):
     __tablename__ = "message"
 
-    id = Column(Integer, primary_key=True)
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     message = Column(String(), nullable=False)

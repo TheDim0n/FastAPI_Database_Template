@@ -4,8 +4,6 @@ from importlib import resources
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from migrate import automigrate
-
 from app.database.database import SessionLocal
 from app.dependencies import get_settings
 
@@ -45,4 +43,4 @@ async def db_session_middleware(request: Request, call_next):
 
 @app.on_event("startup")
 async def startup_event():
-    automigrate()
+    pass
