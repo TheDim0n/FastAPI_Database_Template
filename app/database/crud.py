@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from . import models, schemas
 
@@ -15,7 +16,7 @@ def get_messages(db: Session):
     return db.query(models.Message).all()
 
 
-def delete_message_by_id(db: Session, id: int):
-    _ = db.query(models.Message).filter(models.Message.id == id).delete()
+def delete_message_by_uuid(db: Session, uuid: UUID):
+    _ = db.query(models.Message).filter(models.Message.uuid == uuid).delete()
     db.commit()
     return

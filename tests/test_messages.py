@@ -3,14 +3,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database.database import DataBase
-from app.dependencies import get_db
+from app.dependencies import get_db, get_settings
 from app.main import app
 
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+SQLALCHEMY_DATABASE_URL = get_settings().database_url
 
-engine = create_engine(SQLALCHEMY_DATABASE_URL,
-                       connect_args={"check_same_thread": False})
+engine = create_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 TestingSessionLocal = sessionmaker(autocommit=False,
                                    autoflush=False, bind=engine)
 
@@ -47,8 +46,8 @@ def test_delete_message():
     response = client.get("/messages/")
     assert response.status_code == 200
 
-    id = response.json()[0]["id"]
-    response = client.delete(f"/messages/{id}/")
+    uuid = response.json()[0]["uuid"]
+    response = client.delete(f"/messages/{uuid}/")
     assert response.status_code == 204
 
 

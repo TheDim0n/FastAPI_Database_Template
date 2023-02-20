@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
 class MessageBase(BaseModel):
@@ -10,7 +11,7 @@ class MessageCreate(MessageBase):
 
 
 class MessageDB(MessageBase):
-    id: int
+    uuid: UUID or str
 
     class Config:
         orm_mode = True

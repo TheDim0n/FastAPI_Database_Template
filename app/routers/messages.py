@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from typing import List
+from uuid import UUID
 
 from ..database import crud, schemas
 from ..dependencies import get_db
@@ -23,6 +24,6 @@ async def create_message(new_message: schemas.MessageCreate,
     return crud.create_message(db=db, new_message=new_message)
 
 
-@router.delete('/{id}/', status_code=204, summary="Delete message by id")
-async def delete_message_by_id(id: int, db=Depends(get_db)):
-    return crud.delete_message_by_id(db=db, id=id)
+@router.delete('/{uuid}/', status_code=204, summary="Delete message by id")
+async def delete_message_by_uuid(uuid: UUID or str, db=Depends(get_db)):
+    return crud.delete_message_by_uuid(db=db, uuid=uuid)
