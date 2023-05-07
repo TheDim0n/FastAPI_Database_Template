@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from migrate import automigrate
 
 from app.database.database import SessionLocal
-from app.dependencies import get_settings
+from app.shared.deps import get_settings
 
 
 settings = get_settings()

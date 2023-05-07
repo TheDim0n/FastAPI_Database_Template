@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from typing import List
 
 from ..database import crud, schemas
-from ..dependencies import get_db
+from ..shared.deps import get_db
 
 
 router = APIRouter(

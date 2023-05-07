@@ -1,9 +1,10 @@
-from pydantic import BaseSettings
+from pydantic import BaseSettings, PostgresDsn
 
 
 class Settings(BaseSettings):
     # database settings
-    database_url: str = "sqlite:///./sql_app.db"
+    db_url: str = PostgresDsn
+    db_scheme: str = 'public'
 
     # main app settings
     debug: bool = False
