@@ -1,18 +1,17 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-from ..deps import get_settings
+from app.shared.config import Settings
 
 
-SQLALCHEMY_DATABASE_URL = get_settings().database_url
+SQLALCHEMY_DATABASE_URL = Settings().db_url
 
 engine = create_async_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
     bind=engine,
     class_=AsyncSession,
+    autocommit=False,
+    autoflush=False,
     expire_on_commit=False
 )
 DataBase = declarative_base()

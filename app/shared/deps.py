@@ -1,13 +1,16 @@
-from fastapi import Request
 from functools import lru_cache
 
-from . import config
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.shared.db.database import SessionLocal
+from app.shared.config import Settings
 
 
 @lru_cache()
 def get_settings():
-    return config.Settings()
+    return Settings()
 
 
-def get_db(request: Request):
-    return request.state.db
+async def get_session() -> AsyncSession:
+    async with SessionLocal() as session:
+        yield session

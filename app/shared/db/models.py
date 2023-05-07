@@ -5,13 +5,13 @@ from .database import DataBase
 from app.shared.deps import get_settings
 
 
-SCHEME = get_settings().db_scheme
+SCHEMA = get_settings().db_schema
 
 
 class Message(DataBase):
     __tablename__ = "message"
     __table_args__ = {
-        "scheme": SCHEME
+        "schema": SCHEMA
     }
 
     id = Column(Integer, primary_key=True)

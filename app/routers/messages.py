@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends
 from typing import List
 
-from ..database import crud, schemas
-from ..shared.deps import get_db
+from fastapi import APIRouter, Depends
 
+from app.services.message import MessageService
+from app.shared.dto.message import MessageDTO, MessageCreate
 
 router = APIRouter(
     prefix="/messages",
@@ -11,18 +11,24 @@ router = APIRouter(
 )
 
 
-@router.get('/', summary="Read list of messages",
-            response_model=List[schemas.MessageDB])
-async def read_messages(db=Depends(get_db)):
-    return crud.get_messages(db=db)
+@router.get('', summary="Read list of messages")
+async def read_messages(
+    service: MessageService = Depends()
+) -> List[MessageDTO]:
+    return await service.list()
 
 
-@router.post('/', status_code=201, summary="Create new message")
-async def create_message(new_message: schemas.MessageCreate,
-                         db=Depends(get_db)):
-    return crud.create_message(db=db, new_message=new_message)
+@router.post('', summary="Add new message item", status_code=201)
+async def insert_item(
+    item: MessageCreate,
+    service: MessageService = Depends()
+) -> MessageDTO:
+    return await service.add_item(item)
 
 
-@router.delete('/{id}/', status_code=204, summary="Delete message by id")
-async def delete_message_by_id(id: int, db=Depends(get_db)):
-    return crud.delete_message_by_id(db=db, id=id)
+@router.delete('/{id}', summary="Remove message item by id", status_code=204)
+async def remove_item(
+    id: int,
+    service: MessageService = Depends()
+) -> None:
+    return await service.remove_item(id)
