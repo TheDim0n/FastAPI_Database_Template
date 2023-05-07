@@ -16,13 +16,6 @@ SQLALCHEMY_DATABASE_URL = get_settings().db_url
 
 engine = create_async_engine(SQLALCHEMY_DATABASE_URL, pool_pre_ping=True)
 
-
-async def create_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(DataBase.metadata.drop_all)
-        await conn.run_sync(DataBase.metadata.create_all)
-
-
 test_message = {"message": "test message"}
 
 
@@ -40,6 +33,13 @@ async def client():
         base_url="http://localhost"
     ) as client:
         yield client
+
+
+@pytest.mark.asyncio
+async def test_create_db():
+    async with engine.begin() as conn:
+        await conn.run_sync(DataBase.metadata.drop_all)
+        await conn.run_sync(DataBase.metadata.create_all)
 
 
 @pytest.mark.asyncio
