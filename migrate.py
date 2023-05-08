@@ -1,13 +1,8 @@
 import os
 
-from app.database.database import engine
-
 
 def automigrate():
-    os.system("alembic stamp head")
-    os.system("alembic revision --autogenerate")
-    os.system("alembic upgrade head")
-    engine.execute('DROP TABLE IF EXISTS alembic_version')
+    os.system("alembic --name=postgres upgrade head")
 
 
 if __name__ == "__main__":

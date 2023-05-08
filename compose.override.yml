@@ -8,10 +8,10 @@ services:
       - database
     restart: on-failure
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:password@database:5432/test_db
+      DB_URL: postgresql+asyncpg://postgres:password@database:5432/test_db
       DEBUG: 1
     ports:
-      - 8080:8000
+      - 8000:8000
   database:
       image: postgres:latest
       environment:

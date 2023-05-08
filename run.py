@@ -1,6 +1,6 @@
 import uvicorn
 
-from app.dependencies import get_settings
+from app.shared.deps import get_settings
 
 
 if __name__ == "__main__":
