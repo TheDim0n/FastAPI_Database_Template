@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+import sqlalchemy as sa
 
 from .database import DataBase
 
@@ -14,5 +14,5 @@ class Message(DataBase):
         "schema": SCHEMA
     }
 
-    id = Column(Integer, primary_key=True)
-    message = Column(String(), nullable=False)
+    id = sa.Column(sa.Integer, primary_key=True)
+    message = sa.Column(sa.String, nullable=False)

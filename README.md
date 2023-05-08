@@ -33,3 +33,8 @@ DEBUG                          # boolean, default is false. If true, enable
 ROOT_PATH                      # string, default is empty string. Path setting
                                  for proxy.
 ```
+
+## Docker run
+```
+docker compose up --build -d
+```
