@@ -2,11 +2,9 @@ name: tests
 
 on:
   push:
-    branches:    
-      - 'develop'
     paths-ignore:
       - 'README.md'
-      - 'docker-compose*.yml'
+      - 'compose*.yml'
       - 'Dockerfile'
 
 jobs:
