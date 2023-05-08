@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, DeclarativeMeta
 
 from app.shared.config import Settings
 
@@ -14,4 +14,4 @@ SessionLocal = sessionmaker(
     autoflush=False,
     expire_on_commit=False
 )
-DataBase = declarative_base()
+DataBase: DeclarativeMeta = declarative_base()
